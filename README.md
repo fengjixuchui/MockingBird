@@ -6,7 +6,7 @@
 > English | [中文](README-CN.md)
 
 ## Features
-🌍 **Chinese** supported mandarin and tested with multiple datasets: aidatatang_200zh, magicdata, aishell3, and etc.
+🌍 **Chinese** supported mandarin and tested with multiple datasets: aidatatang_200zh, magicdata, aishell3, data_aishell, and etc.
 
 🤩 **PyTorch** worked for pytorch, tested in version of 1.9.0(latest in August 2021), with GPU Tesla T4 and GTX 2060
 
@@ -16,7 +16,7 @@
 
 🌍 **Webserver Ready** to serve your result with remote calling
 
-### [DEMO VIDEO](https://www.bilibili.com/video/BV1sA411P7wM/)
+### [DEMO VIDEO](https://www.bilibili.com/video/BV17Q4y1B7mY/)
 
 ## Quick Start
 
@@ -36,7 +36,7 @@ You can either train your models or use existing ones:
 * Download dataset and unzip: make sure you can access all .wav in folder
 * Preprocess with the audios and the mel spectrograms:
 `python pre.py <datasets_root>`
-Allowing parameter `--dataset {dataset}` to support aidatatang_200zh, magicdata, aishell3, etc.
+Allowing parameter `--dataset {dataset}` to support aidatatang_200zh, magicdata, aishell3, data_aishell, etc.If this parameter is not passed, the default dataset will be aidatatang_200zh.
 
 * Train the synthesizer:
 `python synthesizer_train.py mandarin <datasets_root>/SV2TTS/synthesizer`
@@ -48,8 +48,9 @@ Allowing parameter `--dataset {dataset}` to support aidatatang_200zh, magicdata,
 
 | author | Download link | Preview Video | Info |
 | --- | ----------- | ----- |----- |
-|@FawenYo | https://drive.google.com/file/d/1H-YGOUHpmqKxJ9FRc6vAjPuqQki24UbC/view?usp=sharing [Baidu Pan](https://pan.baidu.com/s/1vSYXO4wsLyjnF3Unl-Xoxg) Code：1024  | [input](https://github.com/babysor/MockingBird/wiki/audio/self_test.mp3) [output](https://github.com/babysor/MockingBird/wiki/audio/export.wav) | 200k steps with local accent of Taiwan
-|@miven| https://pan.baidu.com/s/1PI-hM3sn5wbeChRryX-RCQ code：2021 | https://www.bilibili.com/video/BV1uh411B7AD/
+| @myself | https://pan.baidu.com/s/1fMh9IlgKJlL2PIiRTYDUvw  [Baidu](https://pan.baidu.com/s/1fMh9IlgKJlL2PIiRTYDUvw) code：om7f  |  | 25k steps trained by multiple datasets
+|@FawenYo | https://drive.google.com/file/d/1H-YGOUHpmqKxJ9FRc6vAjPuqQki24UbC/view?usp=sharing https://u.teknik.io/AYxWf.pt  | [input](https://github.com/babysor/MockingBird/wiki/audio/self_test.mp3) [output](https://github.com/babysor/MockingBird/wiki/audio/export.wav) | 200k steps with local accent of Taiwan, plz use w/ code before 10-22-2021
+|@miven| https://pan.baidu.com/s/1PI-hM3sn5wbeChRryX-RCQ code：2021 | https://www.bilibili.com/video/BV1uh411B7AD/ | plz use w/ code before 10-22-2021
 
 #### 2.3 Train vocoder (Optional)
 > note: vocoder has little difference in effect, so you may not need to train a new one.
@@ -76,6 +77,7 @@ You can then try the toolbox:
 
 | URL | Designation | Title | Implementation source |
 | --- | ----------- | ----- | --------------------- |
+| [1803.09017](https://arxiv.org/abs/1803.09017) | GlobalStyleToken (synthesizer)| Style Tokens: Unsupervised Style Modeling, Control and Transfer in End-to-End Speech Synthesis | This repo |
 | [2010.05646](https://arxiv.org/abs/2010.05646) | HiFi-GAN (vocoder)| Generative Adversarial Networks for Efficient and High Fidelity Speech Synthesis | This repo |
 |[**1806.04558**](https://arxiv.org/pdf/1806.04558.pdf) | **SV2TTS** | **Transfer Learning from Speaker Verification to Multispeaker Text-To-Speech Synthesis** | This repo |
 |[1802.08435](https://arxiv.org/pdf/1802.08435.pdf) | WaveRNN (vocoder) | Efficient Neural Audio Synthesis | [fatchord/WaveRNN](https://github.com/fatchord/WaveRNN) |
@@ -84,7 +86,12 @@ You can then try the toolbox:
 
 ## F Q&A
 #### 1.Where can I download the dataset?
-[aidatatang_200zh](http://www.openslr.org/62/)、[magicdata](http://www.openslr.org/68/)、[aishell3](http://www.openslr.org/93/)
+| Dataset | Original Source | Alternative Sources |
+| --- | ----------- | ---------------|
+| aidatatang_200zh | [OpenSLR](http://www.openslr.org/62/) | [Google Drive](https://drive.google.com/file/d/110A11KZoVe7vy6kXlLb6zVPLb_J91I_t/view?usp=sharing) |
+| magicdata | [OpenSLR](http://www.openslr.org/68/) | [Google Drive (Dev set)](https://drive.google.com/file/d/1g5bWRUSNH68ycC6eNvtwh07nX3QhOOlo/view?usp=sharing) |
+| aishell3 | [OpenSLR](https://www.openslr.org/93/) | [Google Drive](https://drive.google.com/file/d/1shYp_o4Z0X0cZSKQDtFirct2luFUwKzZ/view?usp=sharing) |
+| data_aishell | [OpenSLR](https://www.openslr.org/33/) |  |
 > After unzip aidatatang_200zh, you need to unzip all the files under `aidatatang_200zh\corpus\train`
 
 #### 2.What is`<datasets_root>`?

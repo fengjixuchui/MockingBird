@@ -5,10 +5,10 @@
 
 ### [English](README.md)  | 中文
 
-### [DEMO VIDEO](https://www.bilibili.com/video/BV1sA411P7wM/)
+### [DEMO VIDEO](https://www.bilibili.com/video/BV17Q4y1B7mY/) | [Wiki教程](https://github.com/babysor/MockingBird/wiki/Quick-Start-(Newbie)) ｜ [训练教程](https://vaj2fgg8yn.feishu.cn/docs/doccn7kAbr3SJz0KM0SIDJ0Xnhd)
 
 ## 特性
-🌍 **中文** 支持普通话并使用多种中文数据集进行测试：aidatatang_200zh, magicdata, aishell3， biaobei，MozillaCommonVoice 等
+🌍 **中文** 支持普通话并使用多种中文数据集进行测试：aidatatang_200zh, magicdata, aishell3, biaobei, MozillaCommonVoice, data_aishell 等
 
 🤩 **PyTorch** 适用于 pytorch，已在 1.9.0 版本（最新于 2021 年 8 月）中测试，GPU Tesla T4 和 GTX 2060
 
@@ -18,6 +18,7 @@
 
 🌍 **Webserver Ready** 可伺服你的训练结果，供远程调用
 
+## 开始
 ### 1. 安装要求
 > 按照原始存储库测试您是否已准备好所有环境。
 **Python 3.7 或更高版本** 需要运行工具箱。
@@ -30,11 +31,14 @@
 
 ### 2. 准备预训练模型
 考虑训练您自己专属的模型或者下载社区他人训练好的模型:
+> 近期创建了[知乎专题](https://www.zhihu.com/column/c_1425605280340504576) 将不定期更新炼丹小技巧or心得，也欢迎提问
 #### 2.1 使用数据集自己训练合成器模型（与2.2二选一）
 * 下载 数据集并解压：确保您可以访问 *train* 文件夹中的所有音频文件（如.wav）
 * 进行音频和梅尔频谱图预处理：
-`python pre.py <datasets_root>`
-可以传入参数 --dataset `{dataset}` 支持 aidatatang_200zh, magicdata, aishell3
+`python pre.py <datasets_root> -d {dataset} -n {number}`
+可传入参数：
+* -d`{dataset}` 指定数据集，支持 aidatatang_200zh, magicdata, aishell3, data_aishell, 不传默认为aidatatang_200zh
+* -n `{number}` 指定并行数，CPU 11770k + 32GB实测10没有问题
 > 假如你下载的 `aidatatang_200zh`文件放在D盘，`train`文件路径为 `D:\data\aidatatang_200zh\corpus\train` , 你的`datasets_root`就是 `D:\data\`
 
 * 训练合成器：
@@ -47,8 +51,9 @@
 
 | 作者 | 下载链接 | 效果预览 | 信息 |
 | --- | ----------- | ----- | ----- |
-|@FawenYo | https://drive.google.com/file/d/1H-YGOUHpmqKxJ9FRc6vAjPuqQki24UbC/view?usp=sharing [百度盘链接](https://pan.baidu.com/s/1vSYXO4wsLyjnF3Unl-Xoxg) 提取码：1024  | [input](https://github.com/babysor/MockingBird/wiki/audio/self_test.mp3) [output](https://github.com/babysor/MockingBird/wiki/audio/export.wav) | 200k steps 台湾口音
-|@miven| https://pan.baidu.com/s/1PI-hM3sn5wbeChRryX-RCQ 提取码：2021 | https://www.bilibili.com/video/BV1uh411B7AD/ | 150k steps 旧版需根据[issue](https://github.com/babysor/MockingBird/issues/37)修复
+| 作者 | https://pan.baidu.com/s/1fMh9IlgKJlL2PIiRTYDUvw  [百度盘链接](https://pan.baidu.com/s/1fMh9IlgKJlL2PIiRTYDUvw) 提取码：om7f |  | 25k steps 用3个开源数据集混合训练
+|@FawenYo | https://drive.google.com/file/d/1H-YGOUHpmqKxJ9FRc6vAjPuqQki24UbC/view?usp=sharing [百度盘链接](https://pan.baidu.com/s/1vSYXO4wsLyjnF3Unl-Xoxg) 提取码：1024  | [input](https://github.com/babysor/MockingBird/wiki/audio/self_test.mp3) [output](https://github.com/babysor/MockingBird/wiki/audio/export.wav) | 200k steps 台湾口音需切换到2021-10-22之前代码节点使用
+|@miven| https://pan.baidu.com/s/1PI-hM3sn5wbeChRryX-RCQ 提取码：2021 | https://www.bilibili.com/video/BV1uh411B7AD/ | 150k steps 旧版需根据[issue](https://github.com/babysor/MockingBird/issues/37)修复 并切换到2021-10-22之前代码节点使用
 
 #### 2.3训练声码器 (可选)
 对效果影响不大，已经预置3款，如果希望自己训练可以参考以下命令。
@@ -71,7 +76,7 @@
 ### 3.1 启动Web程序：
 `python web.py`
 运行成功后在浏览器打开地址, 默认为 `http://localhost:8080`
-<img width="578" alt="bd64cd80385754afa599e3840504f45" src="https://user-images.githubusercontent.com/7423248/134275205-c95e6bd8-4f41-4eb5-9143-0390627baee1.png">
+![123](https://user-images.githubusercontent.com/12797292/135494044-ae59181c-fe3a-406f-9c7d-d21d12fdb4cb.png)
 > 注：目前界面比较buggy, 
 > * 第一次点击`录制`要等待几秒浏览器正常启动录音，否则会有重音
 > * 录制结束不要再点`录制`而是`停止`
@@ -85,6 +90,7 @@
 <img width="1042" alt="d48ea37adf3660e657cfb047c10edbc" src="https://user-images.githubusercontent.com/7423248/134275227-c1ddf154-f118-4b77-8949-8c4c7daf25f0.png">
 
 ## 文件结构（目标读者：开发者）
+```
 ├─archived_untest_files 废弃文件
 ├─encoder encoder模型
 │  ├─data_objects
@@ -109,21 +115,28 @@
     │  └─js 
     ├─templates 前端模板
     └─__init__.py Web端入口文件
+```
 
 ## 引用及论文
 > 该库一开始从仅支持英语的[Real-Time-Voice-Cloning](https://github.com/CorentinJ/Real-Time-Voice-Cloning) 分叉出来的，鸣谢作者。
 
 | URL | Designation | 标题 | 实现源码 |
 | --- | ----------- | ----- | --------------------- |
+| [1803.09017](https://arxiv.org/abs/1803.09017) | GlobalStyleToken (synthesizer)| Style Tokens: Unsupervised Style Modeling, Control and Transfer in End-to-End Speech Synthesis | 本代码库 |
 | [2010.05646](https://arxiv.org/abs/2010.05646) | HiFi-GAN (vocoder)| Generative Adversarial Networks for Efficient and High Fidelity Speech Synthesis | 本代码库 |
-|[**1806.04558**](https://arxiv.org/pdf/1806.04558.pdf) | **SV2TTS** | **Transfer Learning from Speaker Verification to Multispeaker Text-To-Speech Synthesis** | This repo |
+|[**1806.04558**](https://arxiv.org/pdf/1806.04558.pdf) | SV2TTS | Transfer Learning from Speaker Verification to Multispeaker Text-To-Speech Synthesis | 本代码库 |
 |[1802.08435](https://arxiv.org/pdf/1802.08435.pdf) | WaveRNN (vocoder) | Efficient Neural Audio Synthesis | [fatchord/WaveRNN](https://github.com/fatchord/WaveRNN) |
 |[1703.10135](https://arxiv.org/pdf/1703.10135.pdf) | Tacotron (synthesizer) | Tacotron: Towards End-to-End Speech Synthesis | [fatchord/WaveRNN](https://github.com/fatchord/WaveRNN)
 |[1710.10467](https://arxiv.org/pdf/1710.10467.pdf) | GE2E (encoder)| Generalized End-To-End Loss for Speaker Verification | 本代码库 |
 
 ## 常見問題(FQ&A)
 #### 1.數據集哪裡下載?
-[aidatatang_200zh](http://www.openslr.org/62/)、[magicdata](http://www.openslr.org/68/)、[aishell3](http://www.openslr.org/93/)
+| 数据集 | OpenSLR地址 | 其他源 (Google Drive, Baidu网盘等) |
+| --- | ----------- | ---------------|
+| aidatatang_200zh | [OpenSLR](http://www.openslr.org/62/) | [Google Drive](https://drive.google.com/file/d/110A11KZoVe7vy6kXlLb6zVPLb_J91I_t/view?usp=sharing) |
+| magicdata | [OpenSLR](http://www.openslr.org/68/) | [Google Drive (Dev set)](https://drive.google.com/file/d/1g5bWRUSNH68ycC6eNvtwh07nX3QhOOlo/view?usp=sharing) |
+| aishell3 | [OpenSLR](https://www.openslr.org/93/) | [Google Drive](https://drive.google.com/file/d/1shYp_o4Z0X0cZSKQDtFirct2luFUwKzZ/view?usp=sharing) |
+| data_aishell | [OpenSLR](https://www.openslr.org/33/) |  |
 > 解壓 aidatatang_200zh 後，還需將 `aidatatang_200zh\corpus\train`下的檔案全選解壓縮
 
 #### 2.`<datasets_root>`是什麼意思?
